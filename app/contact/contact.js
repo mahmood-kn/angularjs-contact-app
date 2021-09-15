@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('myApp.contact', ['ngRoute', 'firebase'])
+  .module('myApp.contact', ['ngRoute'])
 
   .config([
     '$routeProvider',
@@ -16,12 +16,7 @@ angular
 
   .controller('ContactCtrl', [
     '$scope',
-    '$firebaseArray',
-    function ($scope, $firebaseArray) {
-      // var ref = new Firebase(
-      //   'https://angularjs-contact-default-rtdb.firebaseio.com/'
-      // );
-      // $scope.contacts = $firebaseArray(ref);
+    function ($scope) {
       $scope.name = '';
       $scope.email = '';
       $scope.phone = '';
