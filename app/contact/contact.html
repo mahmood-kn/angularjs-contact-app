@@ -1,6 +1,24 @@
-<div class="row mt-5" ng-controller="ContactCtrl" ng-submit="addContact()">
-  <h3 class="mb-3">Add Contact</h3>
-  <div class="col-md-5">
+<div class="row mt-5" ng-controller="ContactCtrl">
+  <div class="col-md-5" ng-show="addForm">
+    <h3 class="mb-3">Add Contact</h3>
+    <form ng-submit="addContact()">
+      <div class="mb-3">
+        <label>Name</label>
+        <input type="text" class="form-control" ng-model="name" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" ng-model="email" />
+      </div>
+      <div class="mb-3">
+        <label>Phone</label>
+        <input type="text" class="form-control" ng-model="phone" />
+      </div>
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+  </div>
+  <div class="col-md-5" ng-show="editForm">
+    <h3 class="mb-3">Edit Contact</h3>
     <form>
       <div class="mb-3">
         <label>Name</label>
@@ -14,7 +32,33 @@
         <label>Phone</label>
         <input type="text" class="form-control" ng-model="phone" />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" ng-click="editContact()">
+        Edit
+      </button>
+      <button class="btn btn-danger" ng-click="cancelEdit()">Cancel</button>
     </form>
+  </div>
+  <div class="col-md-7">
+    <table class="table">
+      <thead>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="c in contacts track by $index">
+          <td>{{c.name}}</td>
+          <td>{{c.email}}</td>
+          <td>{{c.phone}}</td>
+          <td>
+            <button class="btn btn-warning" ng-click="editMode(c)">Edit</button>
+            <button class="btn btn-danger" ng-click="removeContact(c)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

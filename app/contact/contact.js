@@ -20,8 +20,25 @@ angular
       $scope.name = '';
       $scope.email = '';
       $scope.phone = '';
-      var contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
-      console.log(contacts);
+      $scope.contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+      $scope.addForm = true;
+      $scope.editForm = false;
+      $scope.currentItem = null;
+
+      $scope.editMode = function (c) {
+        $scope.addForm = false;
+        $scope.editForm = true;
+        $scope.currentItem = c;
+        $scope.name = c.name;
+        $scope.email = c.email;
+        $scope.phone = c.phone;
+      };
+      $scope.cancelEdit = function () {
+        $scope.addForm = true;
+        $scope.editForm = false;
+        $scope.currentItem = null;
+        clearInputs();
+      };
 
       function clearInputs() {
         $scope.name = '';
@@ -37,10 +54,36 @@ angular
             email: $scope.email,
             phone: $scope.phone,
           };
-          contacts.push(newContact);
-          localStorage.setItem('contacts', JSON.stringify(contacts));
+          $scope.contacts.push(newContact);
+          localStorage.setItem('contacts', JSON.stringify($scope.contacts));
           clearInputs();
         }
+      };
+
+      $scope.editContact = function () {
+        if ($scope.name !== '' && $scope.email !== '' && $scope.phone !== '') {
+          angular.forEach($scope.contacts, function (contact, key) {
+            if (
+              $scope.currentItem.phone != null &&
+              contact.phone === $scope.currentItem.phone
+            ) {
+              contact.name = $scope.name;
+              contact.email = $scope.email;
+              contact.phone = $scope.phone;
+            }
+          });
+          localStorage.setItem('contacts', JSON.stringify($scope.contacts));
+          $scope.cancelEdit();
+        }
+      };
+
+      $scope.removeContact = function (c) {
+        $scope.contacts = $scope.contacts.filter(function (contact) {
+          if (contact.phone !== c.phone) {
+            return contact;
+          }
+        });
+        localStorage.setItem('contacts', JSON.stringify($scope.contacts));
       };
     },
   ]);
