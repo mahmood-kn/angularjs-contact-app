@@ -1,0 +1,16 @@
+<div class="container" ng-controller="ContactListCtrl">
+  <table class="table">
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="c in contacts track by $index">
+        <td>{{c.name}}</td>
+        <td>{{c.email}}</td>
+        <td>{{c.phone}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
