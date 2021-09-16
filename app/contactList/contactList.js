@@ -20,6 +20,9 @@ angular
       var contacts = JSON.parse(localStorage.getItem('contacts'));
       // var self = this;
       // var data = [{ name: 'Moroni', age: 50 } /*,*/];
-      $scope.tableParams = new NgTableParams({}, { dataset: contacts });
+      $scope.tableParams = new NgTableParams(
+        { count: 2 },
+        { dataset: contacts, counts: [] }
+      );
     },
   ]);
