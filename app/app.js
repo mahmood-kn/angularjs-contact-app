@@ -4,6 +4,7 @@
 angular
   .module('myApp', [
     'ngRoute',
+    'ngTable',
     'myApp.contact',
     'myApp.contactList',
     'myApp.version',

@@ -1,16 +1,22 @@
 <div class="container" ng-controller="ContactListCtrl">
-  <table class="table">
-    <thead>
+  <table ng-table="tableParams" class="table" show-filter="true">
+    <!-- <thead>
       <th>Name</th>
       <th>Email</th>
       <th>Phone</th>
     </thead>
-    <tbody>
-      <tr ng-repeat="c in contacts track by $index">
-        <td>{{c.name}}</td>
-        <td>{{c.email}}</td>
-        <td>{{c.phone}}</td>
-      </tr>
-    </tbody>
+    <tbody> -->
+    <tr ng-repeat="c in $data track by $index">
+      <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
+        {{c.name}}
+      </td>
+      <td title="'Email'" filter="{email : 'text'}" sortable="'email'">
+        {{c.email}}
+      </td>
+      <td title="'Phone'" filter="{ phone: 'text'}" sortable="'phone'">
+        {{c.phone}}
+      </td>
+    </tr>
+    <!-- </tbody> -->
   </table>
 </div>

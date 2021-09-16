@@ -15,7 +15,11 @@ angular
 
   .controller('ContactListCtrl', [
     '$scope',
-    function ($scope) {
-      $scope.contacts = JSON.parse(localStorage.getItem('contacts'));
+    'NgTableParams',
+    function ($scope, NgTableParams) {
+      var contacts = JSON.parse(localStorage.getItem('contacts'));
+      // var self = this;
+      // var data = [{ name: 'Moroni', age: 50 } /*,*/];
+      $scope.tableParams = new NgTableParams({}, { dataset: contacts });
     },
   ]);
